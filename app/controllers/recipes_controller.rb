@@ -3,6 +3,5 @@ class RecipesController < ApplicationController
 
   def index
     @data = JSON.parse(File.read("python/recipes/pizza_0_to_99.json"))
-    # render json: @recipes
   end
 end

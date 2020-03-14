@@ -1,8 +1,10 @@
-<% @data["hits"].each do |item| %>
-  <p><%= item["recipe"]["label"] %></p>
-  <p>
-    <% item["recipe"]["totalDaily"].each do |nutrient, quantity| %>
-      <%= nutrient %>: <%= quantity["quantity"].round %>%<br>
-    <% end %>
-  </p>
+<% @data["hits"].each_with_index do |item, index| %>
+  <% if index < 1 %>
+    <p><%= item["recipe"]["label"] %></p>
+    <p>
+      <% item["recipe"]["totalDaily"].each do |nutrient, quantity| %>
+        <%= nutrient %>: <%= quantity["quantity"].round %>%<br>
+      <% end %>
+    </p>
+  <% end %>
 <% end %>
