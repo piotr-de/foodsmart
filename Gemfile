@@ -25,6 +25,8 @@ gem 'jbuilder', '~> 2.7'
 gem 'devise'
 gem 'pycall'
 gem 'rest-client'
+gem 'matplotlib'
+gem 'chartkick'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
