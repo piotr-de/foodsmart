@@ -14,7 +14,7 @@ results = data.json()
 count = results["count"]
 
 with open(f'recipes/{query}_{n}_to_{m}.json', "w", encoding="utf-8") as f:
-  json.dump(results, f, ensure_ascii=False, indent=4)
+  json.dump(results, f, ensure_ascii=False, indent=2)
 
 if count > 99:
   n = n + 100
@@ -22,6 +22,6 @@ if count > 99:
   while n <= count:
     extra_data = requests.get(f"https://www.edamam.com/search?q=pizza&health=vegan&from={n}&to={m}").json()
     with open(f'recipes/{query}_{n}_to_{m}.json', "w", encoding="utf-8") as f:
-      json.dump(extra_data, f, ensure_ascii=False, indent=4)
+      json.dump(extra_data, f, ensure_ascii=False, indent=2)
     n = n + 100
     m = m + 100

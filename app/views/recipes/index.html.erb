@@ -1,3 +1,8 @@
-<% @recipes.first do |recipe| %>
-  <%= recipe %>
+<% @data["hits"].each do |item| %>
+  <p><%= item["recipe"]["label"] %></p>
+  <p>
+    <% item["recipe"]["totalDaily"].each do |nutrient, quantity| %>
+      <%= nutrient %>: <%= quantity["quantity"].round %>%<br>
+    <% end %>
+  </p>
 <% end %>
