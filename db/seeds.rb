@@ -31,7 +31,11 @@ files.each_with_index do |file, index|
   json = File.read(File.join(path, file))
   hits = JSON.parse(json)["hits"]
   hits.each do |hit|
-    recipe_created = Recipe.create!(name: hit["recipe"]["label"], url: hit["recipe"]["url"], data: hit)
-    puts "Recipe \"#{recipe_created.name}\" created"
+    recipe_created = Recipe.create(name: hit["recipe"]["label"], url: hit["recipe"]["url"], data: hit)
+    if recipe_created.save
+      puts "Recipe \"#{recipe_created.name}\" created"
+    else
+      "Recipe skipped"
+    end
   end
 end
