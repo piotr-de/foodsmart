@@ -1,10 +1,15 @@
-<% @data["hits"].each_with_index do |item, index| %>
+<% @recipes.each_with_index do |recipe, index| %>
   <% if index < 1 %>
-    <p><%= item["recipe"]["label"] %></p>
     <p>
-      <% item["recipe"]["totalDaily"].each do |nutrient, quantity| %>
-        <%= nutrient %>: <%= quantity["quantity"].round %>%<br>
+      <%= recipe.name %><br>
+      <%= recipe.category %><br>
+      <%= recipe.url %><br>
+    </p>
+    <p>
+      <% recipe.data["recipe"]["totalDaily"].each do |_, nutrient| %>
+        <%= nutrient["label"] %>: <%= nutrient["quantity"].round %>%<br>
       <% end %>
+      <%= column_chart [[ "Fat", data: recipe.data["recipe"]["totalDaily"]["FAT"]["quantity"] ], [ "Protein", data: recipe.data["recipe"]["totalDaily"]["PROCNT"]["quantity"] ]] %>
     </p>
   <% end %>
 <% end %>
