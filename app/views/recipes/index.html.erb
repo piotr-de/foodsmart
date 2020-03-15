@@ -11,8 +11,8 @@
         <%= nutrient["label"] %>: <%= nutrient["quantity"].round %>%<br>
         <% nutrient_hash[nutrient["label"]] = nutrient["quantity"] %>
       <% end %>
-      <%= pie_chart(nutrient_hash.select { |n| ["Fat", "Protein", "Carbs"].include?(n) }) %>
-      <%= column_chart(nutrient_hash) %>
+      <%= pie_chart nutrient_hash.select { |n| ["Fat", "Protein", "Carbs"].include?(n) }, donut: true, defer: true %>
+      <%= column_chart nutrient_hash, defer: true %>
     </p>
   <% end %>
 <% end %>

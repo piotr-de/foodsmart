@@ -32,7 +32,17 @@ files.each_with_index do |file, index|
   hits = json["hits"]
   category = json["q"]
   hits.each do |hit|
-    recipe_created = Recipe.create(name: hit["recipe"]["label"], category: category, url: hit["recipe"]["url"], data: hit)
+    recipe_hash = {
+      name: hit["recipe"]["label"],
+      category: category,
+      url: hit["recipe"]["url"],
+      energy: hit["recipe"]["totalNutrients"]["ENERC_KCAL"]["quantity"],
+      carbs: hit["recipe"]["totalNutrients"]["CHOCDF"]["quantity"],
+      fat: hit["recipe"]["totalNutrients"]["FAT"]["quantity"],
+      protein: hit.dig("recipe", "totalNutrients", "PROCNT", "quantity"),
+      data: hit
+    }
+    recipe_created = Recipe.create(recipe_hash)
     if recipe_created.save
       puts "Recipe \"#{recipe_created.name}\" created"
     else
