@@ -28,14 +28,15 @@ puts "Files sorted"
 
 files.each_with_index do |file, index|
   puts "#{index + 1}. Parsing #{file}..."
-  json = File.read(File.join(path, file))
-  hits = JSON.parse(json)["hits"]
+  json = JSON.parse(File.read(File.join(path, file)))
+  hits = json["hits"]
+  category = json["q"]
   hits.each do |hit|
-    recipe_created = Recipe.create(name: hit["recipe"]["label"], url: hit["recipe"]["url"], data: hit)
+    recipe_created = Recipe.create(name: hit["recipe"]["label"], category: category, url: hit["recipe"]["url"], data: hit)
     if recipe_created.save
       puts "Recipe \"#{recipe_created.name}\" created"
     else
-      "Recipe skipped"
+      puts "Recipe \"#{recipe_created.name}\" skipped"
     end
   end
 end
