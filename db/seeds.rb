@@ -31,22 +31,22 @@ files.each_with_index do |file, index|
   json = JSON.parse(File.read(File.join(path, file)))
   hits = json["hits"]
   category = json["q"]
-  hits.each do |hit|
+  hits.each_with_index do |hit, index|
     recipe_hash = {
       name: hit["recipe"]["label"],
       category: category,
       url: hit["recipe"]["url"],
-      energy: hit["recipe"]["totalNutrients"]["ENERC_KCAL"]["quantity"],
-      carbs: hit["recipe"]["totalNutrients"]["CHOCDF"]["quantity"],
-      fat: hit["recipe"]["totalNutrients"]["FAT"]["quantity"],
+      energy: hit.dig("recipe", "totalNutrients", "ENERC_KCAL", "quantity"),
+      carbs: hit.dig("recipe", "totalNutrients", "CHOCDF", "quantity"),
+      fat: hit.dig("recipe", "totalNutrients", "FAT", "quantity"),
       protein: hit.dig("recipe", "totalNutrients", "PROCNT", "quantity"),
       data: hit
     }
     recipe_created = Recipe.create(recipe_hash)
     if recipe_created.save
-      puts "Recipe \"#{recipe_created.name}\" created"
+      puts "#{index + 1}. Recipe \"#{recipe_created.name}\" created"
     else
-      puts "Recipe \"#{recipe_created.name}\" skipped"
+      puts "#{index + 1}. Recipe \"#{recipe_created.name}\" skipped"
     end
   end
 end
