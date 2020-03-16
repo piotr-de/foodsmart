@@ -2,7 +2,11 @@ class RecipesController < ApplicationController
   skip_before_action :authenticate_user!, only: [ :index, :api ]
 
   def index
-    @recipes = Recipe.all
+    if !params[:protein].nil? && params[:protein].present?
+      @recipes = Recipe.where("protein > ?", params[:protein]).first(5)
+    else
+      @recipes = Recipe.first(5)
+    end
   end
 
   def api

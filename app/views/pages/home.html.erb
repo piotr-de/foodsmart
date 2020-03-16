@@ -1,2 +1,10 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div class="container">
+  <div class="col-6 offset-4 form-group">
+    <%= form_tag recipes_path, method: :get do %>
+      <%= text_field_tag :query, params[:query], class: "form-control" %>
+      <%= button_tag type: "submit", class: "btn-primary" do %>
+        <i class="fa fa-search icon"></i>
+      <% end %>
+    <% end %>
+  </div>
+</div>
