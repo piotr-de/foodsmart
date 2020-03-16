@@ -270,7 +270,6 @@ DEPENDENCIES
   pry-byebug
   pry-rails
   puma (~> 4.1)
-  pycall
   rails (~> 6.0.2, >= 6.0.2.1)
   rest-client
   sass-rails (>= 6)
