@@ -15,7 +15,7 @@ class IngredientsController < ApplicationController
         protein: result["food"]["nutrients"]["PROCNT"],
         fibre: result["food"]["nutrients"]["FIBTG"]
       })
-      @ingredients << ingredient if ingredient.valid?result
+      @ingredients << ingredient if ingredient.valid? && result["food"]["categoryLabel"] == "food"
     end
   end
 end
