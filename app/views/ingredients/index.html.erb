@@ -1,17 +1,14 @@
-<% @ingredients["hints"].each do |hint| %>
+<% @ingredients.each do |ingredient| %>
   <p>
-    <%= hint["food"]["label"] %><br>
-    <%= hint["food"]["nutrients"] %><br>
-    <%= hint["food"]["category"] %><br>
-    <%= hint["food"]["categoryLabel"] %>
+    <%= ingredient.name %><br>
   </p>
   <p>
-    <% nutrient_hash = Hash.new(0) %>
-    <% hint["food"]["nutrients"].each do |nutrient, amount| %>
-      <%= nutrient %>: <%= amount.round %><br>
-      <% nutrient_hash[nutrient] = amount %>
-    <% end %>
-    <%= pie_chart nutrient_hash.select { |n| ["CHOCDF", "FAT", "PROCNT"].include?(n) }, donut: true, defer: true %>
-    <%= column_chart nutrient_hash, defer: true %>
+    Energy: <%= ingredient.energy %><br>
+    Carbohydrates: <%= ingredient.carbs %><br>
+    Fat: <%= ingredient.fat %><br>
+    Protein: <%= ingredient.protein %><br>
+    Fibre: <%= ingredient.fibre %>
   </p>
+  <% nutrition = { Carbohydrates: ingredient.carbs, Fat: ingredient.fat, Protein: ingredient.protein } %>
+  <%= pie_chart nutrition, donut: true, defer: true %>
 <% end %>
