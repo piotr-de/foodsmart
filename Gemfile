@@ -23,9 +23,7 @@ gem 'jbuilder', '~> 2.7'
 # gem 'bcrypt', '~> 3.1.7'
 
 gem 'devise'
-gem 'pycall'
 gem 'rest-client'
-gem 'matplotlib'
 gem 'chartkick'
 
 # Use Active Storage variant
