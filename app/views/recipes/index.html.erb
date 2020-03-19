@@ -1,4 +1,6 @@
-<%= @result %>
+<% @result.each do |r| %>
+  <%= r %><br>
+<% end %>
 
 <% @recipes.each_with_index do |recipe, index| %>
   <% if index < 5 %>
@@ -13,7 +15,9 @@
         <%= nutrient["label"] %>: <%= nutrient["quantity"].round %>%<br>
         <% nutrient_hash[nutrient["label"]] = nutrient["quantity"] %>
       <% end %>
-      <%= pie_chart nutrient_hash.select { |n| ["Fat", "Protein", "Carbs"].include?(n) }, donut: true, defer: true %>
+      <%#= pie_chart nutrient_hash.select { |n| ["Fat", "Protein", "Carbs"].include?(n) }, donut: true, defer: true %>
+      <% key_nutrient_hash = { Fat: recipe.fat, Carbs: recipe.carbs, Protein: recipe.protein } %>
+      <%= pie_chart key_nutrient_hash, donut: true, defer: true %>
       <%= column_chart nutrient_hash, defer: true %>
     </p>
   <% end %>
