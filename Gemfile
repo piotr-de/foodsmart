@@ -25,6 +25,7 @@ gem 'jbuilder', '~> 2.7'
 gem 'devise'
 gem 'rest-client'
 gem 'chartkick'
+gem 'ngt'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
