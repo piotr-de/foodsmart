@@ -5,11 +5,11 @@ class RecipesController < ApplicationController
   def index
     recipe_params = []
     Recipe.all.each do |recipe|
-      recipe_params << [ recipe.carbs, recipe.fat, recipe.protein ] if recipe.category != @recipe.category
+      recipe_params << [ recipe.carbs, recipe.fat, recipe.protein ]
     end
     index = Ngt::Index.new(3)
     index.batch_insert(recipe_params)
-    query = recipe_params[@recipe.id]
+    query = recipe_params[@recipe.id - 1]
     @result = index.search(query, size: 3)
     @recipes = [ @recipe, Recipe.find(@result[1][:id]), Recipe.find(@result[2][:id]) ]
   end
