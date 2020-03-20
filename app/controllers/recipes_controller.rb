@@ -5,7 +5,7 @@ class RecipesController < ApplicationController
   def index
     recipe_params = []
     Recipe.all.each do |recipe|
-      recipe_params << [ recipe.carbs, recipe.fat, recipe.protein ]
+      recipe_params << [ recipe.carbs, recipe.fat, recipe.protein ] if recipe.category != @recipe.category
     end
     index = Ngt::Index.new(3)
     index.batch_insert(recipe_params)
