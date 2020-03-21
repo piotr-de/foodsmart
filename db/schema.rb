@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_20_134321) do
+ActiveRecord::Schema.define(version: 2020_03_21_230526) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,17 @@ ActiveRecord::Schema.define(version: 2020_03_20_134321) do
     t.string "unit"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "rdas", force: :cascade do |t|
+    t.string "name"
+    t.float "amount"
+    t.string "gender"
+    t.string "age"
+    t.bigint "nutrient_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["nutrient_id"], name: "index_rdas_on_nutrient_id"
   end
 
   create_table "recipes", force: :cascade do |t|
@@ -59,4 +70,5 @@ ActiveRecord::Schema.define(version: 2020_03_20_134321) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "rdas", "nutrients"
 end
